@@ -1,0 +1,51 @@
+name: Validate Kodi add-on
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Compile Python
+        run: python -m compileall -q plugin.video.xtwitter
+
+      - name: Parse addon.xml
+        run: |
+          python - <<'PY'
+          import xml.etree.ElementTree as ET
+          root = ET.parse('plugin.video.xtwitter/addon.xml').getroot()
+          assert root.attrib.get('id') == 'plugin.video.xtwitter'
+          print('addon:', root.attrib.get('id'), root.attrib.get('version'))
+          PY
+
+      - name: Check package tree
+        run: |
+          test -f plugin.video.xtwitter/addon.py
+          test -f plugin.video.xtwitter/addon.xml
+          test -f plugin.video.xtwitter/resources/settings.xml
+          test -f plugin.video.xtwitter/resources/lib/router.py
+
+      - name: Build install ZIP
+        run: |
+          mkdir -p dist
+          zip -qr "dist/plugin.video.xtwitter-ci.zip" plugin.video.xtwitter \
+            -x '*/__pycache__/*' '*.pyc'
+          unzip -l "dist/plugin.video.xtwitter-ci.zip" | head -40
+
+      - name: Upload validation ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: plugin.video.xtwitter-ci
+          path: dist/plugin.video.xtwitter-ci.zip
