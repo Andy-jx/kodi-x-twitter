@@ -7,14 +7,14 @@
     <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary lang="zh_CN">Kodi 中的 X/Twitter 视频浏览、收藏、搜索与播放插件。</summary>
-    <summary lang="en_GB">Browse and play X/Twitter videos in Kodi.</summary>
-    <description lang="zh_CN">Cookie 登录后支持首页推荐、关注、作者主页、插件本地“我喜欢”、书签/收藏、搜索、X 帖子链接、观看历史、分页、缓存回退、播放前重新解析和插件诊断。</description>
-    <description lang="en_GB">Cookie-authenticated X/Twitter video add-on with timelines, likes, bookmarks, search, URL opening, history, pagination, caching, fresh playback resolving and diagnostics.</description>
+    <summary lang="zh_CN">Kodi 中的 X/Twitter 视频浏览、搜索、本地收藏与播放插件。</summary>
+    <summary lang="en_GB">Browse, search, locally favorite and play X/Twitter videos in Kodi.</summary>
+    <description lang="zh_CN">Cookie 登录后支持首页推荐、关注页、视频搜索、作者主页、插件本地“我喜欢”、观看历史、分页、手动刷新、播放前重新解析和插件诊断。</description>
+    <description lang="en_GB">Cookie-authenticated X/Twitter video add-on with For You, Following, Search, author pages, Local Favorites, history, pagination, refresh, fresh playback resolving and diagnostics.</description>
     <platform>all</platform>
     <license>MIT</license>
-    <source>https://github.com/hjx885210-lang/tvbox-web/tree/feature/x-kodi-1.0/kodi-x-plugin/plugin.video.xtwitter</source>
-    <website>https://github.com/hjx885210-lang/tvbox-web</website>
-    <news lang="zh_CN">1.0.6：作者主页改为优先使用 SearchTimeline 的 from:用户名 拉取作者视频，减少对 UserByScreenName/UserTweets 的依赖；作者页也支持刷新。推荐/关注/本地我喜欢保持不变。</news>
+    <source>https://github.com/hjx885210-lang/kodi-x-twitter</source>
+    <website>https://github.com/hjx885210-lang/kodi-x-twitter</website>
+    <news lang="zh_CN">1.0.6：作者主页优先使用 SearchTimeline 的 from:用户名 拉取作者视频；推荐、关注、作者页支持刷新；插件本地“我喜欢”独立于 X 账号 Likes。</news>
   </extension>
 </addon>
