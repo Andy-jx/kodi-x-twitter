@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings version="1">
+  <section id="plugin.video.xtwitter">
+    <category id="general" label="登录与浏览">
+      <group id="1" label="X 登录 Cookie">
+        <setting id="cookie" type="string" label="Cookie（建议完整；至少 auth_token + ct0）">
+          <level>0</level>
+          <default></default>
+          <constraints><allowempty>true</allowempty></constraints>
+          <control type="edit" format="string"><heading>粘贴 x.com Cookie</heading></control>
+        </setting>
+      </group>
+      <group id="2" label="列表">
+        <setting id="count" type="integer" label="每页读取推文数量">
+          <level>0</level>
+          <default>20</default>
+          <constraints><minimum>10</minimum><step>5</step><maximum>50</maximum></constraints>
+          <control type="slider" format="integer"><popup>false</popup></control>
+        </setting>
+        <setting id="history_enabled" type="boolean" label="记录观看历史">
+          <level>0</level><default>true</default><control type="toggle"/>
+        </setting>
+        <setting id="history_limit" type="integer" label="观看历史最多保留">
+          <level>1</level><default>100</default>
+          <constraints><minimum>20</minimum><step>20</step><maximum>500</maximum></constraints>
+          <control type="slider" format="integer"><popup>false</popup></control>
+        </setting>
+      </group>
+    </category>
+
+    <category id="playback" label="播放与缓存">
+      <group id="3" label="播放">
+        <setting id="refresh_before_play" type="boolean" label="播放前重新解析最新地址（推荐）">
+          <level>0</level><default>true</default><control type="toggle"/>
+        </setting>
+      </group>
+      <group id="4" label="列表缓存">
+        <setting id="cache_seconds" type="integer" label="列表缓存秒数">
+          <level>1</level><default>120</default>
+          <constraints><minimum>0</minimum><step>30</step><maximum>1800</maximum></constraints>
+          <control type="slider" format="integer"><popup>false</popup></control>
+        </setting>
+        <setting id="stale_fallback" type="boolean" label="接口失败时显示旧缓存">
+          <level>0</level><default>true</default><control type="toggle"/>
+        </setting>
+      </group>
+    </category>
+
+    <category id="advanced" label="高级 / X 接口兼容">
+      <group id="9" label="Query ID 自动更新">
+        <setting id="auto_qid" type="boolean" label="自动读取最新 X Query ID">
+          <level>0</level><default>true</default><control type="toggle"/>
+        </setting>
+      </group>
+      <group id="10" label="手动 Query ID（留空=自动）">
+        <setting id="qid_home" type="string" label="HomeTimeline"><level>2</level><default></default><constraints><allowempty>true</allowempty></constraints><control type="edit" format="string"/></setting>
+        <setting id="qid_latest" type="string" label="HomeLatestTimeline"><level>2</level><default></default><constraints><allowempty>true</allowempty></constraints><control type="edit" format="string"/></setting>
+        <setting id="qid_user" type="string" label="UserTweets"><level>2</level><default></default><constraints><allowempty>true</allowempty></constraints><control type="edit" format="string"/></setting>
+        <setting id="qid_likes" type="string" label="Likes"><level>2</level><default></default><constraints><allowempty>true</allowempty></constraints><control type="edit" format="string"/></setting>
+        <setting id="qid_bookmarks" type="string" label="Bookmarks"><level>2</level><default></default><constraints><allowempty>true</allowempty></constraints><control type="edit" format="string"/></setting>
+        <setting id="qid_search" type="string" label="SearchTimeline"><level>2</level><default></default><constraints><allowempty>true</allowempty></constraints><control type="edit" format="string"/></setting>
+        <setting id="qid_tweet" type="string" label="TweetResultByRestId"><level>2</level><default></default><constraints><allowempty>true</allowempty></constraints><control type="edit" format="string"/></setting>
+      </group>
+    </category>
+  </section>
+</settings>
