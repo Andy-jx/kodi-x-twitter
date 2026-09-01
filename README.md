@@ -28,6 +28,12 @@ Release assets include:
 - `plugin.video.xtwitter-1.0.6.zip` — tested stable package
 - `SHA256SUMS.txt` — checksum for verification
 
+## Kodi Repository install source
+
+This project now includes an automatic Kodi repository feed. After the `gh-pages` publishing workflow runs on `main`, users can install the small `repository.andyjx` bootstrap ZIP once, then receive future add-on updates from inside Kodi.
+
+Repository feed files are generated automatically from the add-on source and published to the `gh-pages` branch. The bootstrap add-on source is in [`repository.andyjx/`](repository.andyjx/), and publishing is handled by [`.github/workflows/publish-kodi-repository.yml`](.github/workflows/publish-kodi-repository.yml).
+
 ## Features
 
 - Cookie login using your own X account (`auth_token` + `ct0`)
