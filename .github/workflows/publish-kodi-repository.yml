@@ -1,0 +1,75 @@
+name: Publish Kodi repository
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build repository files
+        shell: bash
+        run: |
+          set -euo pipefail
+          PLUGIN_ID="plugin.video.xtwitter"
+          PLUGIN_VERSION=$(python - <<'PY'
+          import xml.etree.ElementTree as ET
+          print(ET.parse('plugin.video.xtwitter/addon.xml').getroot().attrib['version'])
+          PY
+          )
+          REPO_ID="repository.andyjx"
+          REPO_VERSION=$(python - <<'PY'
+          import xml.etree.ElementTree as ET
+          print(ET.parse('repository.andyjx/addon.xml').getroot().attrib['version'])
+          PY
+          )
+
+          rm -rf site
+          mkdir -p "site/zips/${PLUGIN_ID}" "site/zips/${REPO_ID}"
+
+          zip -qr "site/zips/${PLUGIN_ID}/${PLUGIN_ID}-${PLUGIN_VERSION}.zip" "${PLUGIN_ID}" \
+            -x '*/__pycache__/*' '*.pyc'
+          zip -qr "site/zips/${REPO_ID}/${REPO_ID}-${REPO_VERSION}.zip" "${REPO_ID}"
+
+          python - <<'PY'
+          import hashlib
+          import pathlib
+          import xml.etree.ElementTree as ET
+
+          roots = []
+          for path in ['plugin.video.xtwitter/addon.xml', 'repository.andyjx/addon.xml']:
+              roots.append(ET.parse(path).getroot())
+
+          out = pathlib.Path('site/addons.xml')
+          with out.open('w', encoding='utf-8', newline='\n') as f:
+              f.write('<?xml version="1.0" encoding="UTF-8"?>\n<addons>\n')
+              for root in roots:
+                  xml = ET.tostring(root, encoding='unicode')
+                  f.write(xml + '\n')
+              f.write('</addons>\n')
+
+          digest = hashlib.md5(out.read_bytes()).hexdigest()
+          pathlib.Path('site/addons.xml.md5').write_text(digest, encoding='ascii')
+          PY
+
+          cat > site/README.txt <<'TXT'
+          Andy-jx Kodi Repository
+          Install repository.andyjx from the zips/repository.andyjx folder,
+          then install X (Twitter) from the repository inside Kodi.
+          TXT
+
+      - name: Publish gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          publish_branch: gh-pages
+          force_orphan: true
