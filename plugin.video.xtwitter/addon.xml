@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.xtwitter" name="X（Twitter）" version="1.0.6" provider-name="hjx885210-lang">
+<addon id="plugin.video.xtwitter" name="X（Twitter）" version="1.0.6" provider-name="Andy-jx">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
   </requires>
@@ -9,12 +9,12 @@
   <extension point="xbmc.addon.metadata">
     <summary lang="zh_CN">Kodi 中的 X/Twitter 视频浏览、搜索、本地收藏与播放插件。</summary>
     <summary lang="en_GB">Browse, search, locally favorite and play X/Twitter videos in Kodi.</summary>
-    <description lang="zh_CN">Cookie 登录后支持首页推荐、关注页、视频搜索、作者主页、插件本地“我喜欢”、观看历史、分页、手动刷新、播放前重新解析和插件诊断。</description>
-    <description lang="en_GB">Cookie-authenticated X/Twitter video add-on with For You, Following, Search, author pages, Local Favorites, history, pagination, refresh, fresh playback resolving and diagnostics.</description>
+    <description lang="zh_CN">面向电视与遥控器的非官方 X/Twitter Kodi 视频插件。Cookie 登录后支持首页推荐、关注页、视频搜索、作者主页、本地“我喜欢”、观看历史、分页、手动刷新、播放前重新解析和插件诊断。</description>
+    <description lang="en_GB">Unofficial TV-first X/Twitter video add-on for Kodi with cookie-authenticated For You, Following, Search, author pages, Local Favorites, history, pagination, refresh, fresh playback resolving and diagnostics.</description>
     <platform>all</platform>
     <license>MIT</license>
-    <source>https://github.com/hjx885210-lang/kodi-x-twitter</source>
-    <website>https://github.com/hjx885210-lang/kodi-x-twitter</website>
+    <source>https://github.com/Andy-jx/kodi-x-twitter</source>
+    <website>https://github.com/Andy-jx/kodi-x-twitter</website>
     <news lang="zh_CN">1.0.6：作者主页优先使用 SearchTimeline 的 from:用户名 拉取作者视频；推荐、关注、作者页支持刷新；插件本地“我喜欢”独立于 X 账号 Likes。</news>
   </extension>
 </addon>
