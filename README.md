@@ -1,48 +1,51 @@
-# X for Kodi
+# X / Twitter Video Add-on for Kodi
 
-> An unofficial Kodi add-on for browsing and playing X/Twitter videos on TV.
+> Unofficial Kodi 21+ video add-on for browsing, searching and playing X/Twitter videos on TV.
 
 [![Kodi](https://img.shields.io/badge/Kodi-21%2B-17B2E7?logo=kodi&logoColor=white)](https://kodi.tv/)
 [![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Validate](https://github.com/hjx885210-lang/kodi-x-twitter/actions/workflows/validate.yml/badge.svg)](https://github.com/hjx885210-lang/kodi-x-twitter/actions/workflows/validate.yml)
+[![Validate](https://github.com/Andy-jx/kodi-x-twitter/actions/workflows/validate.yml/badge.svg)](https://github.com/Andy-jx/kodi-x-twitter/actions/workflows/validate.yml)
 
-**X for Kodi** is a TV-first Kodi video add-on for X/Twitter. It focuses on a simple remote-control experience rather than reproducing the full X web client.
+**X for Kodi** is a remote-control-friendly Kodi video client focused on X/Twitter video browsing. It is intentionally smaller than the web client and does not host third-party media.
 
-**中文说明：** 这是一个面向电视、大屏和遥控器场景的非官方 X/Twitter Kodi 视频插件。
+**中文说明：** 这是一个面向电视、大屏和遥控器场景的非官方 X/Twitter Kodi 视频插件，重点解决视频浏览、搜索、作者页和播放。
+
+Keywords: `Kodi Twitter addon`, `Kodi X plugin`, `Twitter video Kodi`, `X video Kodi`, `Kodi video plugin`, `Kodi 21 addon`.
+
+## Why this project
+
+The normal X/Twitter website is designed for phones and browsers. This add-on provides a TV-first interface inside Kodi with a simple directory layout, remote-control navigation and fresh media URL resolving before playback.
 
 ## Download
 
 ### Stable: v1.0.6
 
-**[Download the latest stable ZIP from GitHub Releases](https://github.com/hjx885210-lang/kodi-x-twitter/releases/tag/v1.0.6)**
+**[Download the latest stable ZIP from GitHub Releases](https://github.com/Andy-jx/kodi-x-twitter/releases/tag/v1.0.6)**
 
 Release assets include:
 
-- `plugin.video.xtwitter-1.0.6.zip` — the exact previously tested stable package
+- `plugin.video.xtwitter-1.0.6.zip` — tested stable package
 - `SHA256SUMS.txt` — checksum for verification
 
-The `v1.0.6` tag preserves the exact tested stable source. The default `main` branch keeps that stable codebase plus repository/documentation maintenance.
+## Features
 
-## Stable features
-
-- Cookie login (`auth_token` + `ct0`)
+- Cookie login using your own X account (`auth_token` + `ct0`)
 - For You timeline video browsing
 - Following timeline video browsing
-- Manual refresh for For You / Following pages
 - X video search
 - Author video pages
-- Manual refresh on author pages
-- Local Favorites stored by the Kodi add-on
+- Local Favorites stored only in Kodi add-on data
+- Watch history
+- Pagination and manual refresh
 - Long-press: add/remove Local Favorites
 - Long-press: open author page
-- Pagination
 - Fresh media URL resolving before playback
 - Highest-bitrate directly playable MP4 selection
-- Original landscape / portrait aspect ratio preserved
-- Android / Kodi remote-control friendly UI
+- Portrait and landscape aspect ratio preserved
+- Android / TV / remote-control-friendly Kodi UI
 
-The codebase also contains history, bookmark and diagnostics utilities. Features that depend on unstable private X Web endpoints may change without notice and are not treated as stable guarantees.
+Features that depend on private X web endpoints may change when X changes its website APIs.
 
 ## Kodi menu
 
@@ -58,22 +61,13 @@ X (Twitter)
 └─ Diagnostics / 诊断
 ```
 
-Video context menu:
-
-```text
-Long press video
-├─ Add to Local Favorites / Remove from Local Favorites
-└─ Open author page
-```
-
 ## Install
 
 1. Install Kodi 21 or newer.
-2. Download the stable ZIP above.
+2. Download `plugin.video.xtwitter-1.0.6.zip` from Releases.
 3. Kodi → **Add-ons** → **Install from zip file**.
-4. Select `plugin.video.xtwitter-1.0.6.zip`.
-5. Open **X (Twitter)**.
-6. Paste your own X cookie in the login screen.
+4. Select the ZIP and open **X (Twitter)**.
+5. Use your own X login cookie when account features are needed.
 
 Minimum cookie fields:
 
@@ -81,60 +75,46 @@ Minimum cookie fields:
 auth_token=XXX;ct0=XXX
 ```
 
-Use the ASCII semicolon `;` as the separator.
+Detailed guide: [`docs/INSTALL.md`](docs/INSTALL.md)
 
-Detailed instructions: [`docs/INSTALL.md`](docs/INSTALL.md)
+## Security and privacy
 
-## Security
+**Never post your real X cookie, `auth_token`, `ct0`, private feed screenshots or account data in Issues, logs or public repositories.** Treat cookies like passwords.
 
-**Never post your real X cookie, `auth_token`, or `ct0` in Issues, screenshots, logs, chats, or public repositories.** Treat them like passwords.
-
-This repository does not include any user credentials. Local Favorites are stored in Kodi's local add-on data.
+This project does not ship user credentials and does not host X/Twitter media. Local Favorites and history remain in Kodi's local add-on data.
 
 See [`SECURITY.md`](SECURITY.md).
 
-## Privacy-friendly project presentation
+## Public project safety
 
-Public project pages intentionally do **not** include private recommendation feeds, adult/sensitive media, real account cookies, or private account information. Screenshots are optional and should only show clean Kodi UI or error messages with sensitive data removed.
-
-## Source layout
-
-```text
-plugin.video.xtwitter/       Kodi add-on source
-├─ addon.py
-├─ addon.xml
-└─ resources/
-    ├─ lib/
-    ├─ language/
-    └─ settings.xml
-
-docs/                        Installation and troubleshooting
-.github/                     CI and Issue templates
-GitHub Releases              Stable install ZIP + SHA256 checksum
-```
-
-The `plugin.video.xtwitter/` directory contains the stable source line. The exact tested ZIP is published as the `v1.0.6` GitHub Release asset, and the `v1.0.6` tag preserves the corresponding release source.
-
-## Troubleshooting
-
-If a timeline fails to load, first verify that the same cookie still works in the browser and that `auth_token` and `ct0` were entered completely. A malformed or truncated `ct0` can cause authenticated X Web requests to fail even when some read-only requests still appear to work.
-
-More: [`docs/TROUBLESHOOTING.md`](docs/TROUBLESHOOTING.md)
+This repository is intended for normal software development and media-client use. Public screenshots and examples should use ordinary, non-sensitive content only. Do not upload copyrighted media files, private account data, sexually explicit material, illegal content, leaked credentials, license keys or instructions whose primary purpose is bypassing access controls.
 
 ## Development
 
-Every push and pull request runs a lightweight validation workflow:
+Every push and pull request runs validation for:
 
-- Python syntax compilation
-- `addon.xml` XML parsing
-- source tree checks
-- Kodi ZIP packaging check
+- Python syntax
+- `addon.xml` parsing
+- source-tree checks
+- Kodi ZIP packaging
 
-See [`.github/workflows/validate.yml`](.github/workflows/validate.yml).
+Workflow: [`.github/workflows/validate.yml`](.github/workflows/validate.yml)
+
+## Discoverability
+
+Suggested GitHub Topics for this repository:
+
+`kodi`, `kodi-addon`, `kodi-plugin`, `twitter`, `x-twitter`, `video-plugin`, `python`, `android-tv`, `media-center`
+
+A good project description is:
+
+> Unofficial Kodi 21+ add-on for browsing, searching and playing X/Twitter videos on TV.
+
+These keywords describe the project accurately without promising unsupported features or encouraging policy violations.
 
 ## Contributing
 
-Bug reports and compatibility feedback are welcome. Please remove all credentials and private feed content before posting.
+Bug reports and compatibility feedback are welcome. Remove all credentials and private feed content before posting.
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
